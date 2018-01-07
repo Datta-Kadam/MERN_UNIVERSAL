@@ -25,6 +25,7 @@ app.use('/api',function(req,res){
   apiProxy.web(req,res);
 });
 
+//FOR first time use only set up ejs/jade engine and server intiail html with data from server
 app.set('view engine','ejs');
 app.use(requestHandler);
 //End of Proxy
@@ -46,5 +47,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(3000,function(){
+  console.log('App is listening on 3000 port');
+});
+
 
 module.exports = app;

@@ -11959,6 +11959,7 @@ var BooksForm = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
+            delete window.INITIAL_STATE;
             this.props.getBooks();
             //GET THE IMAGES
             _axios2.default.get('/api/images').then(function (response) {
@@ -31615,7 +31616,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default);
 
 //FOR UNIVERSAL APP , GET THE INITIAL STATE FROM THE SERVER so that Initial state and html would be served
-//togather to the client instead of just api response in earlier case.
+//togather to the client instead of just api response in earlier case.//
 
 //Import combined reducers
 var initialState = window.INITIAL_STATE;

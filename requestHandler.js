@@ -1,5 +1,6 @@
 "use strict";
 
+import serialize from 'serialize-javascript';
 import axios from 'axios';
 import React from 'react';
 import {createStore} from 'redux';
@@ -17,12 +18,11 @@ function handleRender(req,res){
         //STEP1 - CREATE A REDUX STORE ON THE SERVER
         const store=createStore(reducers,{"books":{"books":response.data}})
         //STEP2 - GET THE INITIAL STATE FROM THE STORE
-        const initialState=JSON.stringify(store.getState()).replace(/<\/script/g,
-            '<\\/script').replace(/<!--/g, '<\\!--');;
+        const initialState=serialize(store.getState());
         //STEP3 - IMPLEMENT REACT-ROUTER ON THE SERVER TO INTERCEPT CLIENT REQUESTS AND 
         //DEFINE WHAT TO DO WITH THEM.     
         const context={};
-        console.log('How context looks like',context.url);
+        console.log('How context looks like',req.url);
         const reactComponent=renderToString(
             <Provider store={store}>
                 <StaticRouter location={req.url} context={context}>
